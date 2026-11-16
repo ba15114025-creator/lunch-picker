@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="先選每人預算，抽三個午餐選項和同學一起挑。">
+  <meta name="theme-color" content="#fff2e4">
+  <title>午餐吃什麼？</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./meals.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <header class="hero">
+    <nav class="wrap hero-nav" aria-label="頁面導覽">
+      <a class="brand" href="./index.html"><span class="brand-mark art-sprite" aria-hidden="true"></span>午餐吃什麼？</a>
+      <a class="nav-link" href="#menu">看午餐清單 <span aria-hidden="true">↓</span></a>
+    </nav>
+    <div class="wrap hero-main">
+      <div>
+        <h1>午餐<span>吃什麼？</span></h1>
+        <p>每次中午都不知道要跟朋友們吃什麼？<br class="wide-only">先訂每人預算，抽幾個選項一起挑。</p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <span class="hero-sticker hero-bowl art-sprite"></span>
+        <span class="hero-sticker hero-dumplings art-sprite"></span>
+        <span class="hero-sticker hero-sparkle art-sprite"></span>
+        <span class="hero-sticker hero-heart art-sprite"></span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="picker" aria-label="午餐抽選">
+      <form id="picker-form" novalidate>
+        <fieldset>
+          <legend>每人午餐預算</legend>
+          <div class="budget-options">
+            <label><input type="radio" name="budget" value="100"><span>$100</span></label>
+            <label><input type="radio" name="budget" value="150" checked><span>$150</span></label>
+            <label><input type="radio" name="budget" value="200"><span>$200</span></label>
+            <label><input type="radio" name="budget" value="custom"><span>自己輸入</span></label>
+          </div>
+        </fieldset>
+        <div class="custom-budget" id="custom-budget" hidden>
+          <label for="custom-amount">自訂金額（元）</label>
+          <input id="custom-amount" type="text" inputmode="numeric" placeholder="例如 120" aria-describedby="budget-error">
+          <p class="budget-error" id="budget-error" role="alert" hidden></p>
+        </div>
+        <p class="form-note">依最低價抽選，卡片會顯示完整的價格區間。</p>
+        <button class="draw-button" type="submit"><span class="button-sparkle art-sprite" aria-hidden="true"></span> 抽午餐</button>
+      </form>
+      <section class="results" aria-labelledby="results-title">
+        <h2 id="results-title">抽選結果</h2>
+        <p id="results-status" class="results-status" role="status">選好預算後，按「抽午餐」。</p>
+        <div class="results-art" id="results-art" aria-hidden="true"><span class="art-sprite"></span></div>
+        <div id="results-list" class="meal-grid" hidden></div>
+      </section>
+    </section>
+
+    <section class="menu" id="menu" aria-labelledby="menu-title">
+      <div class="menu-heading">
+        <h2 id="menu-title">平常會吃的</h2>
+        <p>每人一餐的參考價格（新臺幣）</p>
+      </div>
+      <div id="menu-list" class="meal-grid"></div>
+    </section>
+    <noscript><p>請開啟 JavaScript 以載入清單和抽選功能。</p></noscript>
+  </main>
+
+  <template id="meal-card">
+    <article class="meal">
+      <div class="meal-picture" aria-hidden="true"><span class="meal-art art-sprite"></span></div>
+      <div class="meal-details">
+        <h3></h3>
+        <p class="meal-price"></p>
+        <p class="meal-note" hidden></p>
+      </div>
+    </article>
+  </template>
+</body>
+</html>
